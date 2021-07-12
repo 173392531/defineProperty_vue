@@ -14,3 +14,10 @@ var obj = {
     },
     g: [22, 33, 44, 55]
 };
+console.log(obj)
+const btn=document.getElementById('btn')
+btn.onclick=function () {
+    // alert('shabi')
+    obj.c.d.e.f=1111
+    console.log(obj)
+}
