@@ -15,6 +15,7 @@ export default function defineReactive(data,key,val){
         // 可被配置
         configurable:true,
         get(){
+            // 如果现在处于依赖收集阶段
             if(Dep.target){
                 dep.depend()
                 if(childOb){
@@ -28,7 +29,9 @@ export default function defineReactive(data,key,val){
                 return 
             }
             val=newValue;
+            // 当设置了新值，这个新值也要被observe
             childOb=observe(newValue);
+            // 发布订阅模式，通知dep
             dep.notify()
         }
     })

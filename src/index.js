@@ -1,3 +1,5 @@
+import observe from './observe.js'
+import Watcher from './Watcher.js'
 var obj = {
     a: {
         m: {
