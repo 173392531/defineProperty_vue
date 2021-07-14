@@ -1,6 +1,13 @@
 import observe from './observe.js'
 import Dep from './Dep.js'
 
+/*
+通过Object.defineProperty设置对象的key属性，
+使得能够捕获到该属性值的set/get动作。一般是由Watcher的实例对象进行get操作，
+此时Watcher的实例对象将被自动添加到Dep实例的依赖数组中，
+在外部操作触发了set时，将通过Dep实例的notify来通知所有依赖的watcher进行更新。
+*/
+
 export default function defineReactive(data,key,val){
     const dep=new Dep()
     if(arguments.length==2){
@@ -9,6 +16,7 @@ export default function defineReactive(data,key,val){
     // 形成observe => Observer => defineReactive的循环调用，知道子类不为对象时终止
     let childOb=observe(val)
 
+    console.log('defineReactive中的key',key)
     Object.defineProperty(data,key,{
         // 可枚举
         enumerable:true,
